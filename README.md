@@ -1,2 +1,8 @@
 # pytorch 
-CNN, GAN, RNN, DQN, Autoencoder, ResNet, Seq2Seq, Adversarial Attack IN PYTORCH
+### CNN 
+CNN + **ResNet**
+### Autoencoder
+### GAN
+### RNN
+### DQN
+Seq2Seq, Adversarial Attack IN PYTORCH
