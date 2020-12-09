@@ -1,4 +1,4 @@
-# ALGORITHM IN PYTORCH
+# ALGORITHM IN PYTORCH 
 ### CNN : 이미지 처리
 CNN + **ResNet** 
 ### Autoencoder : 사람의 지도 없이 학습(encoder + decoder)
