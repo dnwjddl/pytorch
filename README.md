@@ -12,3 +12,6 @@
 Seq2Seq, Adversarial Attack IN PYTORCH
 
 [딥러닝 주의](https://www.notion.so/8-d72569a210ff489f9242ff74a831e5a4)
+
+## 출처
+펭귄브로의 3분 딥러닝 (파이토치 맛)
