@@ -10,3 +10,5 @@
 #### [8] GAN : 새로운 이미지 생성
 #### [9] DQN : 게임환경에서 스스로 성장
 Seq2Seq, Adversarial Attack IN PYTORCH
+
+[딥러닝 주의](https://www.notion.so/8-d72569a210ff489f9242ff74a831e5a4)
