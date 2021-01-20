@@ -16,6 +16,28 @@ convolution filter을 사용한 이미지 처리
 컨볼루션 커널을 여러겹 겹치며 복잡한 데이터에도 사용가능
 - shortcut 모듈은 증폭할때만 따로 갖게 됨
 1. [ResNet-CIFAR10](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B4%5D%20ResNet.ipynb)
+
+```python
+class BasicBlock(nn.Module):
+    ...
+    def forward(self,x):
+        out = F.relu(self.bn1(self.conv1(x)))
+        out = self.bn2(self.conv2(out))
+        
+        out += self.shortcut(x)
+        out = F.relu(out)
+        return out
+class ResNet(nn.Module):
+    ...
+    def _make_layer(self, planes, num_blocks, stride):
+        strides = [stride] + [1]*(num_blocks - 1)
+        layers = []
+        for stride in strides:
+            layers.append(BasicBlock(self.in_planes, planes, stride))
+            self.in_planes = planes
+        return nn.Sequential(*layers)
+     ...
+```
 ### [5] Autoencoder
 사람의 지도 없이 학습(encoder + decoder), 잠재변수 시각화, 잡음을 통하여 특징 추출 우선순위 확인  
 1. [AutoEncoder](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B5%5D%20AutoEncoder.ipynb)
@@ -104,6 +126,9 @@ images, labels = next(dataiter)
 ```python
 ### TRAIN ###
 optimizer = torch.optim.SGD(model.parameters(), lr = 0.02..)
+## weight_decay 값이 커질수록 가중치 값이 작아지게 되고, Overfitting 현상은 해소 but underfitting 위험
+# optimizer = optim.SGD(model.parameters(), lr = 0.1, momentum = 0.9, weight_decay = 0.0005)
+# scheduler = optim.lr_scheduler.StepLR(optimizer, step_size = 50, gamma = 0.1)
 
 criterion = nn.BCELoss()
 loss = criterion(model(x_test).squeeze(), y_test)
@@ -125,6 +150,11 @@ with torch.no_grad():
 ```
 ✔ torch.max(1) -> 1차원을 기준으로 max 값을 정함  
 ex) x = tensor(2,40,8)차원 -> x.max(1) -> 40 x 2(하나는 인덱스값, 하나는 값)
+
+✔ **wright decay**
+- L2 regularization은 가장 일반적으로 사용되는 regularization기법  
+- 오버피팅은 가중치 매개변수의 값이 커서 발생하는 경우가 많기 때문에 가중치가 클 수록 큰 패널티를 부과
+- L1 regularization도 동시에 사용가능
 
 ## 텐서 저장
 학습된 모델을 state_dict() 함수 형태로 바꾸어준 후 .pt 파일로 저장  
