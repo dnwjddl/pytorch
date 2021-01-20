@@ -19,7 +19,11 @@ Seq2Seq, Adversarial Attack IN PYTORCH
 
 ## 텐서 생성
 ```python
-torch.Tensor([[1,2,3],[4,5,6]])
+torch.Tensor([[1,2,3],[4,5,6]], dtype = torch.int32, device = device)
+
+# torch에서 dtype 나 device 바꾸는 방법
+y = torch.as_tensor(x, dtype = torch.half, device = 'cpu')
+y = x.to(device, dtype = torch.float.64)
 
 # start부터 end까지 step별로 tensor
 torch.arange(start = 0, end, step = 1, dtype = None, requires_grad = True)
