@@ -1,9 +1,9 @@
 # ALGORITHM IN PYTORCH 
 ## 목차
 #### [1] ANN
-[ANN-Autograd](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B1%5D%20ANN_Autograd.ipynb)
-[ANN-NeuralNetwork](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B1%5D%20ANN_NeualNetwork.ipynb)
-[ANN-tensor](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B1%5D%20ANN_tensor.ipynb)
+1. [ANN-Autograd](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B1%5D%20ANN_Autograd.ipynb)  
+2. [ANN-NeuralNetwork](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B1%5D%20ANN_NeualNetwork.ipynb)  
+3. [ANN-tensor](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B1%5D%20ANN_tensor.ipynb)
 #### [2] DNN - data augmentation과 dropout을 이용한 성능 높이기(과적합 줄이기)
 #### [3] CNN - convolution filter을 사용한 이미지 처리
 #### [4] ResNet(CNN) - 컨볼루션 커널을 여러겹 겹치며 복잡한 데이터에도 사용가능
