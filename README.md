@@ -77,7 +77,7 @@ new_model = NeuralNet(2,5)
 new_model.load_state_dict(torch.load('./model.pt'))
 ```
 
-✔ sklearn의 make_blobs  
+### ✔ sklearn의 make_blobs  
 **분류용 가상 데이터 생성** : 등방성 가우시안 정규분포를 이용해 가상 데이터를 생성한다 (등방성: 모든 방향으로 같은 성질을 가진다는 뜻)
 ```python
 from sklearn.datasets import make_blobs
