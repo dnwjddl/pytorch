@@ -52,18 +52,67 @@ torch.randn(*sizes, dtype = , device = , requires_grad = )
 ```torch.new_tensor(x, requires_grad=True)```와 ```x.clone().detach().requires_grad(True)```는 같은 의미
 
 ## 텐서 연산
+### 간단 연산
+- squeeze() & unsqueeze()
+- congiguous()
+- transpose(), permute()?
 
-## 딥러닝 텐서
+### 딥러닝 Dataset 
 ```python
-criterion = nn.BCELoss()
+### 데이터 로드 ###
+trainset = datasets.FashionMNIST( root = './.data/', train = True,download = True, transform = transform)
+```
+```python
+## transform: 텐서로 변환, 크기 조절(resize), 크롭(crop), 밝기(brightness), 대비(contrast)등 사용 가능
+transform = transforms.Compose([
+    transforms.ToTensor()
+])
+```
+```python
+### DATALOADER ###
+train_loader = data.DataLoader(
+    dataset= trainset,
+    batch_size = batch_size )
+```
+
+✔ iter(), next() 
+- for문을 사용하지 않고 iter() 함수를 사용하여 반복문 안에서 이용할 수 있도록 함
+- next() 함수를 이용하여 배치 1개를 가지고 옴
+
+```python
+dataiter = iter(train_loader)
+images, labels = next(dataiter)
+```
+✔ 시각화 (make_grid())
+- ```img = utils.make_grid(images, padding=0)``` : 여러 이미지를 모아 하나의 이미지로 만들 수 있음
+- 파이토치의 텐서에서 numpy로 바꾸어야 시각화 가능
+
+
+## 딥러닝 텐서 과정
+```python
+### TRAIN ###
 optimizer = torch.optim.SGD(model.parameters(), lr = 0.02..)
+
+criterion = nn.BCELoss()
 loss = criterion(model(x_test).squeeze(), y_test)
+# loss = F.cross_entropy(output, target)
 
 optimizer.zero_grad() #optimizer 초기화
 
 train_loss.backward() #그레이디언트 계산
 optimizer.step() #step별로 계산
+
+### EVALUATE ###
+with torch.no_grad():
+  for data, target in test_loader:
+    output = model(data)
+    test_loss += F.cross_entropy(output, target, reduction='sum').item()
+    
+    pred = output.max(1, keepdim = True)[1]
+    correct += pred.eq(target.view_as(pred)).sum().item()
 ```
+✔ torch.max(1) -> 1차원을 기준으로 max 값을 정함  
+ex) x = tensor(2,40,8)차원 -> x.max(1) -> 40 x 2(하나는 인덱스값, 하나는 값)
 
 ## 텐서 저장
 학습된 모델을 state_dict() 함수 형태로 바꾸어준 후 .pt 파일로 저장  
@@ -86,6 +135,34 @@ x_train, y_train = make_blobs(n_samples = 80, n_features = 2,
                             shuffle = True, cluster_std = 0.3)
 ```      
 [딥러닝 주의](https://www.notion.so/8-d72569a210ff489f9242ff74a831e5a4)
+
+### 성능 올리기
+#### 조기 종료
+- 학습 중간중간 검증용 데이터셋으로 모델이 학습 데이터에만 과적합되지 않았는지 확인
+- **검증 데이터셋에 대한 성능이 나빠지기 시작하기 직전이 가장 적합한 모델**
+#### Data Augmentation
+```python
+train_loader = torch.utils.data.DataLoader(
+    datasets.MNIST('./.data',
+                  train = True,
+                  download = True,
+                  transform = transforms.Compose([
+                      transforms.RandomHorizontalFlip(),
+                      transforms.ToTensor(),
+                      transforms.Normalize((0.1307,),(0.3081,))
+                  ])),
+    batch_size = BATCH_SIZE, shuffle = True)
+```
+#### dropout
+- 사실 layer가 얕은거 아니면 dropout보단 batch normalization이 더 나음
+```python
+## nn.Dropout & F.dropout 
+# forward 함수 내
+x = F.dropout(x, training = self.training, p = self.dropout
+
+# main 함수 내
+model = Net(dropout_p = 0.2)
+```
 
 ## 출처
 펭귄브로의 3분 딥러닝 (파이토치 맛)
