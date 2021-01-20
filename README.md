@@ -33,7 +33,7 @@ torch.from_numpy() #numpy array인 ndarray로부터 텐서를 만듦
 # N(0,1) 정규분포를 따르는 random 함수 추출
 torch.randn(*sizes, dtype = , device = , requires_grad = )
 ```
-```torch.Tensor```의 Autograd패키지는 모든 연산에 대해 자동미분을 제공  
+```torch.Tensor```의 Autograd패키지는 모든 연산에 대해 **자동미분**을 제공  
 텐서의 속성 중 하나인 ```x.requires_grad = True```로 하면 텐서의 모든 연산에 대해서 추적을 시작  
 계산 작업 후 ```x.backward()```를 호출하면 모든 그레이디언트를 자동으로 계산할 수 있도록 함
 <br><br>
@@ -43,8 +43,16 @@ torch.randn(*sizes, dtype = , device = , requires_grad = )
 기록 추적(및 메로리 사용)에 대해 방지를 하려면 ```with.no_grad()```를 wrap 가능
 이 텐서의 변화도는 ```x.grad```속성에 누적된다  
 : with.no_grad()는 변화도(gradient)는 필요없지만 ```requires_grad = True``` 가 설정되어 학습가능한 매개변수를 갖는 모델은 평가할 때 유용
+<br><br>
+```x.data```도 ```x.detach()```와 비슷한 기능
+<br><br>
+```x.detach()```: 기존 텐서에서 gradient가 전파가 안되는 텐서  
+```x.clone()```: 기존 텐서와 내용 복사한 tensor 생성
+<br><br>
+```torch.new_tensor(x, requires_grad=True)```와 ```x.clone().detach().requires_grad(True)```는 같은 의미
 
 ## 텐서 연산
+
 
 [딥러닝 주의](https://www.notion.so/8-d72569a210ff489f9242ff74a831e5a4)
 
