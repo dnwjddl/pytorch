@@ -9,6 +9,8 @@ data augmentation과 dropout을 이용한 성능 높이기(과적합 줄이기)
 1. [DNN-FashionMNIST](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B2%5D%20DNN_FashionMNIST.ipynb)
 ### [3] CNN
 convolution filter을 사용한 이미지 처리
+- ```convolution Layer``` : 이미지 특징 추출
+- ```pooling Layer``` : 필터를 거친 여러 특징 중 가장 중요한 특징 하나를 고르기 (덜 중요한 특징을 버리기 때문에 이미지 차원이 축소)
 1. [CNN-FashionMNIST](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B3%5D%20CNN.ipynb)
 ### [4] ResNet(CNN)
 컨볼루션 커널을 여러겹 겹치며 복잡한 데이터에도 사용가능
