@@ -44,10 +44,15 @@ class ResNet(nn.Module):
 ### [6] RNN : 순차적 데이터 처리(영화 리뷰 감정 분석 & 기계 번역)
 1. [RNN-TestClassification](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B6%5D%20RNN_TextClassification.ipynb)
 2. [RNN-Seq2Seq](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B6%5D%20RNN_Seq2Seq.ipynb)
-### [7] 적대적 공격: FGSM 공격
-### [8] GAN : 새로운 이미지 생성
-### [9] DQN : 게임환경에서 스스로 성장
-Seq2Seq, Adversarial Attack IN PYTORCH
+### [7] 적대적 공격
+FGSM 공격  
+1.[AdversialAttack](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B7%5D%20Adversial%20Attack.ipynb)
+### [8] GAN
+새로운 이미지 생성  
+1. [cGAN](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B8%5D%20GAN.ipynb)
+### [9] DQN
+게임환경에서 스스로 성장  
+1. [DQN-cartpole](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B9%5D%20DQN.ipynb)
 
 ## 텐서 생성
 ```python
