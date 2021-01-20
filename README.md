@@ -75,11 +75,13 @@ trainset = datasets.FashionMNIST( root = './.data/', train = True,download = Tru
 ```python
 ## transform: 텐서로 변환, 크기 조절(resize), 크롭(crop), 밝기(brightness), 대비(contrast)등 사용 가능
 transform = transforms.Compose([
-    transforms.ToTensor()
+    transforms.ToTensor(),
+    transforms.Normalize((0.1307,),(0.3081,))
 ])
 ```
 ```python
 ### DATALOADER ###
+# Dataloader > 텐서화 & 정규화
 train_loader = data.DataLoader(
     dataset= trainset,
     batch_size = batch_size )
