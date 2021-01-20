@@ -53,7 +53,38 @@ torch.randn(*sizes, dtype = , device = , requires_grad = )
 
 ## 텐서 연산
 
+## 딥러닝 텐서
+```python
+criterion = nn.BCELoss()
+optimizer = torch.optim.SGD(model.parameters(), lr = 0.02..)
+loss = criterion(model(x_test).squeeze(), y_test)
 
+optimizer.zero_grad() #optimizer 초기화
+
+train_loss.backward() #그레이디언트 계산
+optimizer.step() #step별로 계산
+```
+
+## 텐서 저장
+학습된 모델을 state_dict() 함수 형태로 바꾸어준 후 .pt 파일로 저장  
+state_dict() 함수는 모델 내 가중치들이 딕셔너리 형태로 {연산 이름: 가중치 텐서와 편향 텐서} 와 같이 표현된 데이터
+```python
+# 학습된 가중치 저장
+torch.save(model.state_dict(), './model.pt')
+
+# 이후 로드 [전이학습]
+new_model = NeuralNet(2,5)
+new_model.load_state_dict(torch.load('./model.pt'))
+```
+
+✔ sklearn의 make_blobs  
+**분류용 가상 데이터 생성** : 등방성 가우시안 정규분포를 이용해 가상 데이터를 생성한다 (등방성: 모든 방향으로 같은 성질을 가진다는 뜻)
+```python
+from sklearn.datasets import make_blobs
+x_train, y_train = make_blobs(n_samples = 80, n_features = 2,
+                            centers = [[1,1],[1,-1],[-1,1],[-1,-1]],
+                            shuffle = True, cluster_std = 0.3)
+```      
 [딥러닝 주의](https://www.notion.so/8-d72569a210ff489f9242ff74a831e5a4)
 
 ## 출처
