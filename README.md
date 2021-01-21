@@ -54,9 +54,7 @@ class ResNet(nn.Module):
 
 ✔ **Teacher Forcing**
 
-<img src="https://user-images.githubusercontent.com/72767245/105319929-e49e3780-5c08-11eb-82ab-175661217f4c.png" width="30%">
-
-<img src="https://user-images.githubusercontent.com/72767245/105319969-f2ec5380-5c08-11eb-8a85-de6f5242069d.png" width="30%">
+<img src="https://user-images.githubusercontent.com/72767245/105319929-e49e3780-5c08-11eb-82ab-175661217f4c.png" width="30%"> <img src="https://user-images.githubusercontent.com/72767245/105319969-f2ec5380-5c08-11eb-8a85-de6f5242069d.png" width="30%">
 
 - 많은 데이터에서는 디코더가 예측한 토큰을 다음 반복에서 입력될 토큰으로 갱신해주는 것이 정석
 - 하지만 학습이 아직 되지 않은 상태의 모델은 잘못된 예측 토큰을 입력으로 사용될 수 있으므로, **Teacher Forcing** 사용
