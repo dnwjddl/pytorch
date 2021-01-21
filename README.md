@@ -100,6 +100,15 @@ FGSM 공격
 
 ### [8] GAN
 새로운 이미지 생성  
+```python
+# '진짜'와 '가짜' 레이블 생성
+real_labels = torch.ones(BATCH_SIZE, 1)
+fake_labels = torch.zeros(BATCH_SIZE, 1)
+```
+```python
+#진짜와 가짜 이미지를 갖고 낸 오차를 더해서 판별자의 오차 계산한다
+d_loss = criterion(D(images), real_labels) + criterion(D(G(z)), fake_labels)
+```
 1. [cGAN](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B8%5D%20GAN.ipynb)
 
 ### [9] DQN
@@ -172,6 +181,7 @@ transform = transforms.Compose([
 ```
 ```python
 ### DATALOADER ###
+## DataLoader는 학습 이미지와 레이블을 (이미지, 레이블) 튜플 형태로 반환해줌
 # Dataloader > 텐서화 & 정규화
 train_loader = data.DataLoader(
     dataset= trainset,
@@ -219,6 +229,13 @@ with torch.no_grad():
 ```
 ✔ torch.max(1) -> 1차원을 기준으로 max 값을 정함  
 ex) x = tensor(2,40,8)차원 -> x.max(1) -> 40 x 2(하나는 인덱스값, 하나는 값)
+
+✔ F.nll_loss(output, torch.tensor([263]))
+- Negative log likelihood_loss
+- ```F.logsoftmax``` + ```F.null_loss``` = ```F.crossEntropy```
+
+✔ torch.clamp(input, min, max)
+- 해당 범주 값 이상 이하가 되지 않도록 잡는 명령어
 
 ✔ **wright decay**
 - L2 regularization은 가장 일반적으로 사용되는 regularization기법  
