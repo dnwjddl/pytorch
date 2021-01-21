@@ -42,10 +42,12 @@ class ResNet(nn.Module):
 사람의 지도 없이 학습(encoder + decoder), 잠재변수 시각화, 잡음을 통하여 특징 추출 우선순위 확인  
 1. [AutoEncoder](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B5%5D%20AutoEncoder.ipynb)
 ### [6] RNN : 순차적 데이터 처리(영화 리뷰 감정 분석 & 기계 번역)
-* tokenizing
-* word dictionary
-* word embedding
-1. [RNN-TestClassification](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B6%5D%20RNN_TextClassification.ipynb)
+* tokenizing, word dictionary, word embedding
+* RNN의 gradient vanishing을 해결하기 위하여 GRU 사용
+    - ```update gate``` 이전 은닉 벡터가 지닌 정보를 새로운 은닉 벡터가 얼마나 유지할지
+    - ```reset gate``` 새로운 입력이 이전 은닉 벡터와 어떻게 조합하는지 결정
+
+1. [GRU-TestClassification](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B6%5D%20RNN_TextClassification.ipynb)
 2. [RNN-Seq2Seq](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B6%5D%20RNN_Seq2Seq.ipynb)
 ### [7] 적대적 공격
 FGSM 공격  
