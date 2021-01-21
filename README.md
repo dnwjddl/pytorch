@@ -42,6 +42,9 @@ class ResNet(nn.Module):
 사람의 지도 없이 학습(encoder + decoder), 잠재변수 시각화, 잡음을 통하여 특징 추출 우선순위 확인  
 1. [AutoEncoder](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B5%5D%20AutoEncoder.ipynb)
 ### [6] RNN : 순차적 데이터 처리(영화 리뷰 감정 분석 & 기계 번역)
+* tokenizing
+* word dictionary
+* word embedding
 1. [RNN-TestClassification](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B6%5D%20RNN_TextClassification.ipynb)
 2. [RNN-Seq2Seq](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B6%5D%20RNN_Seq2Seq.ipynb)
 ### [7] 적대적 공격
