@@ -46,8 +46,9 @@ class ResNet(nn.Module):
 * RNN의 gradient vanishing을 해결하기 위하여 GRU 사용
     - ```update gate``` 이전 은닉 벡터가 지닌 정보를 새로운 은닉 벡터가 얼마나 유지할지
     - ```reset gate``` 새로운 입력이 이전 은닉 벡터와 어떻게 조합하는지 결정
-
 1. [GRU-TestClassification](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B6%5D%20RNN_TextClassification.ipynb)
+
+- 인코더 RNN + 디코더 RNN
 2. [RNN-Seq2Seq](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B6%5D%20RNN_Seq2Seq.ipynb)
 ### [7] 적대적 공격
 FGSM 공격  
