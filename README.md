@@ -93,6 +93,18 @@ torch.randn(*sizes, dtype = , device = , requires_grad = )
 <br><br>
 ```torch.new_tensor(x, requires_grad=True)```와 ```x.clone().detach().requires_grad(True)```는 같은 의미
 
+✔ GRU 내 torch 연산 [iterator 연산]
+- parameters() 함수는 그 신경망 모듈의 가중치 정보들을 iterator 형태로 반환하게 된다
+- next(self.parameters() (그 외, iter(~), new()등)
+```python
+# nn.GRU 모듈의 첫 번째 가중치 텐서를 추출 > 이 텐서는 모델의 가중치텐서와 같은 데이터 타입
+# new를 통하여 모델의 가중치와 같은 모양인 (n_layers, batch_size, hidden_dum) 모양의 텐서 변환
+def _init_state(self, batch_size = 1):
+    weight = next(self.parameter()).data
+    return weight.new(self.n_layers, batch_size, self.hidden_dim).zero_()
+```
+
+
 ## 텐서 연산
 ### 간단 연산
 - squeeze() & unsqueeze()
@@ -214,6 +226,22 @@ x = F.dropout(x, training = self.training, p = self.dropout
 
 # main 함수 내
 model = Net(dropout_p = 0.2)
+```
+#### 검증 오차가 가장 적은 최적의 모델
+```python
+best_val_loss = None
+for e in range(1, EPOCHS +1):
+    train(model, optimizer, train_iter)
+    val_loss, val_accuracy = evaluate(model, val_iter)
+    
+    # 검증 오차가 가장 적은 최적의 모델 저장 
+    if not best_val_Loss or val_loss < best_val_loss:
+        # 경로가 없을때 경로를 만들어줌
+        if not os.path.isdir("snapshot"):
+            os.makedirs("snapshot")
+        # 저장
+        torch.save(model.state_dict(), './snapshot/txtclassification.pt')
+        best_val_loss = val_loss
 ```
 
 ## 출처
