@@ -243,6 +243,8 @@ for e in range(1, EPOCHS +1):
         torch.save(model.state_dict(), './snapshot/txtclassification.pt')
         best_val_loss = val_loss
 ```
+✔ K-Fold (교차 검증)
+- 돌아가면서 모델을 훈련시켜 최적의 하이퍼파라미터를 찾는다
 
 ## 출처
 펭귄브로의 3분 딥러닝 (파이토치 맛)
