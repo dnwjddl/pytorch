@@ -27,6 +27,7 @@ class BasicBlock(nn.Module):
         out += self.shortcut(x)
         out = F.relu(out)
         return out
+        
 class ResNet(nn.Module):
     ...
     def _make_layer(self, planes, num_blocks, stride):
