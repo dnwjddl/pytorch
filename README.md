@@ -41,6 +41,8 @@ class ResNet(nn.Module):
 ### [5] Autoencoder
 사람의 지도 없이 학습(encoder + decoder), 잠재변수 시각화, 잡음을 통하여 특징 추출 우선순위 확인  
 1. [AutoEncoder](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B5%5D%20AutoEncoder.ipynb)
+
+
 ### [6] RNN : 순차적 데이터 처리(영화 리뷰 감정 분석 & 기계 번역)
 * tokenizing, word dictionary, word embedding
 * RNN의 gradient vanishing을 해결하기 위하여 GRU 사용
@@ -49,13 +51,28 @@ class ResNet(nn.Module):
 1. [GRU-TestClassification](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B6%5D%20RNN_TextClassification.ipynb)
 
 - 인코더 RNN + 디코더 RNN
+
+✔ **Teacher Forcing**
+
+<img src="https://user-images.githubusercontent.com/72767245/105319929-e49e3780-5c08-11eb-82ab-175661217f4c.png" width="30%">
+
+<img src="https://user-images.githubusercontent.com/72767245/105319969-f2ec5380-5c08-11eb-8a85-de6f5242069d.png" width="30%">
+
+- 많은 데이터에서는 디코더가 예측한 토큰을 다음 반복에서 입력될 토큰으로 갱신해주는 것이 정석
+- 하지만 학습이 아직 되지 않은 상태의 모델은 잘못된 예측 토큰을 입력으로 사용될 수 있으므로, **Teacher Forcing** 사용
+- 디코더 학습 시 실제 번역문의 토큰을 디코더의 전 출력 값 대신 입력으로 사용해 학습을 가속하는 방법
+- 번역문의 i번째 토큰에 해당하는 값 targets[i] 를 디코더의 입력값으로 설정
+
 2. [RNN-Seq2Seq](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B6%5D%20RNN_Seq2Seq.ipynb)
+
 ### [7] 적대적 공격
 FGSM 공격  
 1.[AdversialAttack](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B7%5D%20Adversial%20Attack.ipynb)
+
 ### [8] GAN
 새로운 이미지 생성  
 1. [cGAN](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B8%5D%20GAN.ipynb)
+
 ### [9] DQN
 게임환경에서 스스로 성장  
 1. [DQN-cartpole](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B9%5D%20DQN.ipynb)
