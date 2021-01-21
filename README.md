@@ -73,15 +73,29 @@ def __init__(self, vocab_size, hidden_size):
     
 def forward(self, inputs, targets):
     ...
-    embedding = self.embedding(inputs).unsqueeze(1)
-    encoder_output, encoder_state = self.encoder(embedding, initial_state) #encoder_state: 문맥벡터
+    embedding = self.embedding(inputs).unsqueeze(1) #임베딩
+    encoder_output, encoder_state = self.encoder(embedding, initial_state)  
+    # encoder_state: 문맥벡터 >> decoder에서 첫번째 은닉벡터로 쓰임
+    # encoder_output: y >> 실제 output 값
     decoder_state = encoder_state
+    ...
+    decoder_output, decoder_state = self.decoder(decoder_input, decoder_state)
     
+    # 디코더의 출력값으로 다음 글자 예측하기
+    projection = self.project(decoder_output)
+    outputs.append(projection)
+    
+    #피처 포싱을 이용한 디코더 입력 갱신
+    decoder_input = torch.LongTensor([targets[i]])
+    
+    ...
 ```
 
 ### [7] 적대적 공격
 FGSM 공격  
+
 1.[AdversialAttack](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B7%5D%20Adversial%20Attack.ipynb)
+
 
 ### [8] GAN
 새로운 이미지 생성  
