@@ -99,7 +99,8 @@ FGSM 공격
 
 
 ### [8] GAN
-새로운 이미지 생성  
+새로운 이미지 생성   
+cGAN에 레이블 정보 추가
 ```python
 # '진짜'와 '가짜' 레이블 생성
 real_labels = torch.ones(BATCH_SIZE, 1)
@@ -112,7 +113,24 @@ d_loss = criterion(D(images), real_labels) + criterion(D(G(z)), fake_labels)
 1. [cGAN](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B8%5D%20GAN.ipynb)
 
 ### [9] DQN
-게임환경에서 스스로 성장  
+게임환경에서 스스로 성장   
+memory를 deque에 넣어서 오래된 경험(멍청할때의 경험)은 삭제됨  
+act() 함수는 epsilon값을 넣어주어 무작위 행동을 하도록 함   
+```self.model(state)```- 행동들에 대한 가치값  
+```action```은 epsilon 합쳐져서 1,0 둘 중 하나 action 고름  
+loss는 현재 가치값(정답)과 예측된 가치값(예측, 할인해줌)의 차이로 구해줌
+
+```python
+env= gym.make('CartPole-v0')
+
+agent = DQNAgent()
+for e in range(1, EPISODES+1):
+    state= env.reset()
+    ...
+    while True:
+        env.render() # 게임 화면 띄우기
+```
+
 1. [DQN-cartpole](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B9%5D%20DQN.ipynb)
 
 ## 텐서 생성
