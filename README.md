@@ -63,6 +63,22 @@ class ResNet(nn.Module):
 
 2. [RNN-Seq2Seq](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B6%5D%20RNN_Seq2Seq.ipynb)
 
+```python
+def __init__(self, vocab_size, hidden_size):
+    ...
+    self.embedding = nn.Embedding(vocab_size, hidden_size)
+    self.encoder = nn.GRU(hidden_size, hidden_size)
+    self.decoder = nn.GRU(hidden_size, hidden_size)
+    self.project = nn.Linear(hidden_size, vocab_size)
+    
+def forward(self, inputs, targets):
+    ...
+    embedding = self.embedding(inputs).unsqueeze(1)
+    encoder_output, encoder_state = self.encoder(embedding, initial_state) #encoder_state: 문맥벡터
+    decoder_state = encoder_state
+    
+```
+
 ### [7] 적대적 공격
 FGSM 공격  
 1.[AdversialAttack](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B7%5D%20Adversial%20Attack.ipynb)
