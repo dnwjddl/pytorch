@@ -9,13 +9,14 @@ data augmentation과 dropout을 이용한 성능 높이기(과적합 줄이기)
 1. [DNN-FashionMNIST](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B2%5D%20DNN_FashionMNIST.ipynb)
 ### [3] CNN
 convolution filter을 사용한 이미지 처리
+1. [CNN-FashionMNIST](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B3%5D%20CNN.ipynb)
 - ```convolution Layer``` : 이미지 특징 추출
 - ```pooling Layer``` : 필터를 거친 여러 특징 중 가장 중요한 특징 하나를 고르기 (덜 중요한 특징을 버리기 때문에 이미지 차원이 축소)
-1. [CNN-FashionMNIST](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B3%5D%20CNN.ipynb)
 ### [4] ResNet(CNN)
 컨볼루션 커널을 여러겹 겹치며 복잡한 데이터에도 사용가능
-- shortcut 모듈은 증폭할때만 따로 갖게 됨
 1. [ResNet-CIFAR10](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B4%5D%20ResNet.ipynb)
+
+- shortcut 모듈은 증폭할때만 따로 갖게 됨
 
 ```python
 class BasicBlock(nn.Module):
@@ -45,11 +46,13 @@ class ResNet(nn.Module):
 
 
 ### [6] RNN : 순차적 데이터 처리(영화 리뷰 감정 분석 & 기계 번역)
+1. [GRU-TetClassification](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B6%5D%20RNN_TextClassification.ipynb)
 * tokenizing, word dictionary, word embedding
 * RNN의 gradient vanishing을 해결하기 위하여 GRU 사용
     - ```update gate``` 이전 은닉 벡터가 지닌 정보를 새로운 은닉 벡터가 얼마나 유지할지
     - ```reset gate``` 새로운 입력이 이전 은닉 벡터와 어떻게 조합하는지 결정
-1. [GRU-TestClassification](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B6%5D%20RNN_TextClassification.ipynb)
+
+2. [RNN-Seq2Seq](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B6%5D%20RNN_Seq2Seq.ipynb)
 
 - 인코더 RNN + 디코더 RNN
 
@@ -61,8 +64,6 @@ class ResNet(nn.Module):
 - 하지만 학습이 아직 되지 않은 상태의 모델은 잘못된 예측 토큰을 입력으로 사용될 수 있으므로, **Teacher Forcing** 사용
 - 디코더 학습 시 실제 번역문의 토큰을 디코더의 전 출력 값 대신 입력으로 사용해 학습을 가속하는 방법
 - 번역문의 i번째 토큰에 해당하는 값 targets[i] 를 디코더의 입력값으로 설정
-
-2. [RNN-Seq2Seq](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B6%5D%20RNN_Seq2Seq.ipynb)
 
 ```python
 def __init__(self, vocab_size, hidden_size):
@@ -94,12 +95,13 @@ def forward(self, inputs, targets):
 
 ### [7] 적대적 공격
 FGSM 공격  
-
 1.[AdversialAttack](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B7%5D%20Adversial%20Attack.ipynb)
 
 
 ### [8] GAN
 새로운 이미지 생성   
+1. [cGAN](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B8%5D%20GAN.ipynb)  
+
 cGAN에 레이블 정보 추가
 ```python
 # '진짜'와 '가짜' 레이블 생성
@@ -110,10 +112,10 @@ fake_labels = torch.zeros(BATCH_SIZE, 1)
 #진짜와 가짜 이미지를 갖고 낸 오차를 더해서 판별자의 오차 계산한다
 d_loss = criterion(D(images), real_labels) + criterion(D(G(z)), fake_labels)
 ```
-1. [cGAN](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B8%5D%20GAN.ipynb)
 
 ### [9] DQN
 게임환경에서 스스로 성장   
+1. [DQN-cartpole](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B9%5D%20DQN.ipynb)  
 memory를 deque에 넣어서 오래된 경험(멍청할때의 경험)은 삭제됨  
 act() 함수는 epsilon값을 넣어주어 무작위 행동을 하도록 함   
 ```self.model(state)```- 행동들에 대한 가치값  
@@ -130,8 +132,6 @@ for e in range(1, EPISODES+1):
     while True:
         env.render() # 게임 화면 띄우기
 ```
-
-1. [DQN-cartpole](https://github.com/dnwjddl/pytorch-in-DeepLearning/blob/master/%5B9%5D%20DQN.ipynb)
 
 ## 텐서 생성
 ```python
@@ -181,9 +181,20 @@ def _init_state(self, batch_size = 1):
 
 ## 텐서 연산
 ### 간단 연산
-- squeeze() & unsqueeze()
-- congiguous()
-- transpose(), permute()?
+- squeeze() & unsqueeze() : 1인 차원을 생성 or 제거
+```squeeze()```함수를 사용하면 해당 인덱스의 값 squeeze  
+```unsqueeze()```함수를 사용하면 해당 인덱스의 값에 1차원 추가
+- contiguous()
+연상과정에서 Tensor가 메모리에 올려진 순서 유지하려면 congiguous()사용
+- transpose(), permute()
+```transpose()```원본 tensor와 data를 공유하면서 새로운 tensor 반환
+```permute()```는 모든 차원에서 맞교환할 수 있음(transpose()는 두 개의 차원을 맞교환)
+- reshape(), view()
+```reshape()```은 원본 tensor의 복사본 혹은 view를 반환한다
+
+```transpose()```와 ```view()```의 차이점은 view함수는 오직 contiguous tensor에서만 작동, 반환하는 tensor 역시 contiguous하다  
+transpose()는 non-contiguous와 contiguous tensor 둘다에서 작동 가능  
+**contiguous 하고 싶다면 transpose().contiguous()해주어야함(permute도 동일)**
 
 ### 딥러닝 Dataset 
 ```python
