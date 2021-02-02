@@ -266,7 +266,7 @@ ex) x = tensor(2,40,8)차원 -> x.max(1) -> 40 x 2(하나는 인덱스값, 하�
 ✔ torch.clamp(input, min, max)
 - 해당 범주 값 이상 이하가 되지 않도록 잡는 명령어
 
-✔ **wright decay**
+✔ **weight decay**
 - L2 regularization은 가장 일반적으로 사용되는 regularization기법  
 - 오버피팅은 가중치 매개변수의 값이 커서 발생하는 경우가 많기 때문에 가중치가 클 수록 큰 패널티를 부과
 - L1 regularization도 동시에 사용가능
